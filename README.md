@@ -24,3 +24,7 @@ With a secure webhook, however, you set the key in the Webhook
 configurations on the GitHub repo settings. What this does is that it
 will somehow encrypt the webhook, and it's much harder to parse through
 the request data.
+
+Oh, now I get it. It's up to me to secure the webhook - GitHub just
+simply attaches the secret token onto the webhook object itself. Whoop
+de doo.
