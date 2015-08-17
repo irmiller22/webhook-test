@@ -11,10 +11,15 @@ def foo():
     print "testing the webhook"
 
     sha_name, signature = request.headers.get('X-Hub-Signature').split('=')
+
+    print signature
+
     if sha_name != 'sha1':
         print "sha name doesnt equal sha1"
 
     mac = hmac.new(str('secret'), msg=request.data, digestmod=sha1)
+
+    print mac.hexdigest()
 
     if (hmac.compare_digest(str(mac.hexdigest()), signature) and
             request.headers.get('X-GitHub-Event') == u'push'):
