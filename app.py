@@ -8,6 +8,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def foo():
+    print "testing the webhook"
+
     sha_name, signature = request.headers.get('X-Hub-Signature').split('=')
     if sha_name != 'sha1':
         print "sha name doesnt equal sha1"
@@ -28,8 +30,6 @@ def foo():
 
         response = jsonify(success_message)
         response.status_code = 200
-
-        return response
     else:
         failure_message = {
             'status': 400,
@@ -38,6 +38,8 @@ def foo():
 
         response = jsonify(failure_message)
         response.status_code = 400
+
+    return response
 
 if __name__ == '__main__':
     app.run()
