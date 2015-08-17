@@ -28,4 +28,5 @@ the request data.
 Oh, now I get it. It's up to me to secure the webhook - GitHub just
 simply attaches the secret token onto the webhook object itself. Whoop
 de doo. Let's try this. Another try. ARgh, another try. Yet another try.
-This time I added a bunch of print statements to help debug. Welp.
+This time I added a bunch of print statements to help debug. Welp. Come
+on now.
