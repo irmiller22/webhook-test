@@ -30,6 +30,9 @@ def foo():
     print ('Push Event: {}'
            .format(request.headers.get('X-GitHub-Event') == u'push'))
 
+    print ('Hex Comparison: {}'
+           .format(hmac.compare_digest(mac.hexdigest(), signature)))
+
     if (hmac.compare_digest(mac.hexdigest(), signature) and
             request.headers.get('X-GitHub-Event') == u'push'):
 
