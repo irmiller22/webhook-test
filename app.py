@@ -27,10 +27,10 @@ def foo():
 
     print 'before the hmac conditional'
 
-    print ('Event: {}'
+    print ('Push Event: {}'
            .format(request.headers.get('X-GitHub-Event') == u'push'))
 
-    if (hmac.compare_digest(str(mac.hexdigest()), signature) and
+    if (hmac.compare_digest(mac.hexdigest(), signature) and
             request.headers.get('X-GitHub-Event') == u'push'):
 
         print 'Got past the hexdigest and push event conditional'
