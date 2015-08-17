@@ -16,7 +16,7 @@ def foo():
 
     mac = hmac.new(str('secret'), msg=request.data, digestmod=sha1)
 
-    if (hmac.compare_digest(str(mac.hexdigest()), str('secret')) and
+    if (hmac.compare_digest(str(mac.hexdigest()), signature) and
             request.headers.get('X-GitHub-Event') == u'push'):
 
         api_data = json.loads(request.data)
