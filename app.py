@@ -31,9 +31,9 @@ def foo():
            .format(request.headers.get('X-GitHub-Event') == u'push'))
 
     print ('Hex Comparison: {}'
-           .format(hmac.compare_digest(mac.hexdigest(), signature)))
+           .format(hmac.compare_digest(str(mac.hexdigest()), str(signature))))
 
-    if (hmac.compare_digest(mac.hexdigest(), signature) and
+    if (hmac.compare_digest(str(mac.hexdigest()), str(signature)) and
             request.headers.get('X-GitHub-Event') == u'push'):
 
         print 'Got past the hexdigest and push event conditional'
@@ -69,7 +69,3 @@ def foo():
 
 if __name__ == '__main__':
     app.run()
-
-
-signature = 'ba585f639e2dcf8532e44d467be2eeb15ed196dc'
-hexdigest = 'ba585f639e2dcf8532e44d467be2eeb15ed196dc'
