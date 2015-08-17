@@ -8,22 +8,14 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def foo():
-    success_message = {
-        'status': 200,
-        'message': "Github Webhook: success!"
-    }
-
-    response = jsonify(message)
-    response.status_code = 200
-
-    sha_name, signature = requests.headers.get('X-Hub-Signature').split('=')
+    sha_name, signature = request.headers.get('X-Hub-Signature').split('=')
     if sha_name != 'sha1':
         print "sha name doesnt equal sha1"
 
     mac = hmac.new(str('secret'), msg=request.data, digestmod=sha1)
 
-    if hmac.compare_digest(str(mac.hexdigest()), str('secret')) and
-        request.headers.get('X-GitHub-Event') == u'push':
+    if (hmac.compare_digest(str(mac.hexdigest()), str('secret')) and
+            request.headers.get('X-GitHub-Event') == u'push'):
 
         api_data = json.loads(request.data)
         print api_data
@@ -34,7 +26,7 @@ def foo():
             'message': "Github Webhook: success!"
         }
 
-        response = jsonify(message)
+        response = jsonify(success_message)
         response.status_code = 200
 
         return response
@@ -43,6 +35,9 @@ def foo():
             'status': 400,
             'message': "Github Webhook: failed!"
         }
+
+        response = jsonify(failure_message)
+        response.status_code = 400
 
 if __name__ == '__main__':
     app.run()
